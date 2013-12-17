@@ -22,7 +22,7 @@ $isRoot = $section->ID == $post->ID;
 get_header(); ?>
 
 		<div id="breadcrumb" class="inner hidden-phone" role="navigation" aria-label="breadcrumbs">
-			<?php wsf_breadcrumbs(" &raquo; ", ""); ?>
+			<?php betterBreadcrumbs(); echo "These breadcrumbs are better."; ?>
 		</div>
 
 		<?php while ( have_posts() ) : the_post(); ?>

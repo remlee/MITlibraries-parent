@@ -25,12 +25,12 @@ body {
 }
 
 #container {	
+	min-height: 10px;
+	margin: 16px auto;
+	margin: 1rem auto;
 	position: relative;
 	width: 960px;
-	margin: 15px auto;
-	padding: 0 0 0px 0;
-	min-height: 10px;
-	
+	width: 60rem;
 }
 
 .inner {
@@ -101,6 +101,10 @@ img {
 	position: relative;
 }
 
+.page-barton-help .mainContent {
+	width: 100%;
+}
+
 #mainContent>.space247 {
 	top: 10px;
 }
@@ -151,12 +155,13 @@ h2.bigHead {
 	margin-bottom: 10px;
 }
 
+/* Accordion */
+
 .expandable {
-	clear: both;
-	border-bottom: 5px solid #eceaea;
-	margin: 0px 0px 0px -20px;
-	padding: 0px;
+	border-bottom: none;
+	padding: 0;
 	position: relative;
+	width: 100%;
 }
 
 #content .expandable h3 {
@@ -180,7 +185,6 @@ h2.bigHead {
 	background: #fbfbfb;
 }
 
-
 .expandable .content {
 	padding: 10px 10px 40px 20px;
 	display: none;
@@ -188,11 +192,6 @@ h2.bigHead {
 
 .no-js .expandable .content {
 	display: block;
-}
-
-#content .expandable {
-	border-bottom: none;
-	padding: 0;
 }
 
 #content .expandable:nth-of-type(odd) {
@@ -255,35 +254,37 @@ h2.bigHead {
 	margin: 0 0 0px 0;
 }
 
-/* ----
-Header Styles
----- */
+/* ---- Header Styles ---- */
 
 header {
 	font-weight: bold;
-	height: 98px;
+	margin-bottom: 4px;
+	margin-bottom: 0.25rem;
 }
 
-header a, .main-navigation li a {
+header a,
+.main-navigation li a {
 	color: #0099ff;
 	text-transform: none;
 }
 
-#logo {
-	position: absolute;
-	top: -2px;
-	cursor: pointer;
-	left: 18px;
-	width: 132px;
-	height: 56px;
+.librariesLogo {
 	background: transparent url(../images/logo.png) no-repeat;
+	cursor: pointer;
+	display: block;
+	height: 56px;
+	float: left;
+	margin: 0 0 14px 18px;
+	margin: 0 0 0.875rem 1.125rem;
+	position: relative;
+	width: 132px;
 	text-indent: -9999px;
 }
 
-#toolbox {
-	position: absolute;
-	top: 2px;
-	right: 0px;
+.toolbox {
+	display: block;
+	float: right;
+	position: relative;
 }
 
 #toolbox a {
@@ -315,19 +316,17 @@ a.yourAccount:before {
 	top: 6px;
 }
 
-header nav {
-	position: absolute;
+header .main-navigation {
+	clear: both;
+	float: left;
 	font-size: 14px;
-	top: 68px;
-	left: -19px;
-	margin-top: 0px !important;
+	position: relative;
 }
 
 header #site-navigation a {
 	display: inline-block;
-	/*background: transparent url(../images/icon-nav-arrow.gif) no-repeat right center;*/
-	padding-right: 15px;
 	margin-right: 15px;
+	padding-right: 15px;
 }
 
 #site-navigation li, #megaMenu {
@@ -507,10 +506,8 @@ nav a.active {
 }
 
 #content {  
-	/*margin: 10px 10px 10px 10px;*/
 	font-size: 14px;
 	line-height: 20px;
-
 }
 
 .locationContent {
@@ -526,7 +523,6 @@ nav a.active {
 }
 
 #leftContent {
-	/*width: 140px;*/
 	border-right: 1px solid #eceaea;
 	font-size: 12px;
 	line-height: 12px;
@@ -534,7 +530,6 @@ nav a.active {
 
 #mainContent {
 	float: left;
-	/*width: 700px;*/
 }
 
 .noThumbs #mainContent {
@@ -543,19 +538,6 @@ nav a.active {
 
 .locationContent #mainContent {
 	margin-top: 50px;
-}
-
-
-.thinSidebar #mainContent {
-	/*width: 720px;*/
-}
-
-.column3 #mainContent {
-	/*width: 540px;*/
-}
-
-.column1 #mainContent {
-	/*width: 940px;*/
 }
 
 #leftContent {
@@ -569,11 +551,6 @@ nav a.active {
 #sidebarContent {
 	float: right;
 	margin: 0 0 0 0px;
-	/*width: 230px;*/
-}
-
-.thinSidebar #sidebarContent{
-	/*width: 170px !important;*/
 }
 
 .snav li, .pagenav ul li {
@@ -1579,7 +1556,8 @@ ul.arrows li,
 	color: #ffcc33;
 	float: left;
 	font-size: 1.5em;
-	margin-top: -12px;
+	margin-top: -16px;
+	margin-top: -1rem;
 	margin-left: -1.075em;
 	position: absolute;
 	top: 50%;
@@ -1603,6 +1581,13 @@ ul.arrows li,
 
 .hrList td h3{
 	line-height: 18px;
+}
+
+.page-hours .anchor {
+	display: block;
+	position: relative;
+	top: -5.5em;
+	visibility: hidden;
 }
 
 #wpstats {
@@ -1982,7 +1967,7 @@ html:not(.flexbox) .page-getit .flexItem {
 .page-getit .mainContent {
 	margin: 0 0 0 30px;
 	padding: 0 1em;
-	max-width: 940px
+	max-width: 940px;
 	width: 100%;
 }
 

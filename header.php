@@ -35,6 +35,8 @@
 <link href="<?php bloginfo('template_directory') ?>/libs/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/libs/fontawesome/css/font-awesome.css" rel="stylesheet" media="all">
 <link href="/wp-content/themes/libraries/libs/fontawesome-MITLibraries/style.css" rel="stylesheet" media="all">
+<link href="<?php bloginfo('template_directory') ?>/libs/datepicker/styles/glDatePicker.default.css" rel="stylesheet" media="all">
+<link href="<?php bloginfo('template_directory') ?>/libs/lightbox/css/lightbox.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/css/main.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/css/menu.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/css/responsive.css" rel="stylesheet" media="all">
@@ -50,8 +52,8 @@
 
 <body <?php body_class(); ?>>
 	<div id="container">
-		<header class="row group">
-			
+		<header class="group">
+
 			<?php
 				global $blog_id;
 				$current_blog_id = $blog_id;
@@ -61,8 +63,10 @@
 				}
 			?>
 
-			<div id="logo">
+			<div id="logo" class="librariesLogo">
+				<?php 
 					if ($blog_id != 21) {
+						echo get_bloginfo( 'name', 'display' );
 					}
 					else {
 						echo "MIT Libraries";
@@ -70,17 +74,7 @@
 				?>
 			</div>
 
-			<nav id="site-navigation" class="span12 main-navigation" role="navigation">
-				<h3 class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></h3>
-				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentytwelve' ); ?>"><?php _e( 'Skip to content', 'twentytwelve' ); ?></a>
-				<?php 
-					wp_nav_menu(
-						array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' )
-					);
-				?>	
-			</nav><!-- #site-navigation -->
-
-			<div id="toolbox">
+			<div id="toolbox" class="toolbox">
 				<a class="yourAccount" href="/barton-account">Your Account</a>
 				<div id="asktell">
 					<img class="hidden-phone" src="<?php bloginfo('template_directory') ?>/images/ask-tell.png" alt="" usemap="#asktell"/>
@@ -94,7 +88,17 @@
 						<area shape="poly" coords="150,0,150,23,71,22,84,0" href="/suggestions" alt="Tell Us" title="Tell Us"   />
 					</map>
 				</div>
-			</div>
+			</div><!-- end div.toolbox -->
+
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+				<h3 class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></h3>
+				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentytwelve' ); ?>"><?php _e( 'Skip to content', 'twentytwelve' ); ?></a>
+				<?php 
+					wp_nav_menu(
+						array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' )
+					);
+				?>	
+			</nav><!-- #site-navigation -->
 
 			<?php
 				//switch back to blog being viewed, unless MOH site
