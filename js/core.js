@@ -7,7 +7,7 @@ var lastMarker = "";
 
 var showMap = 0;
 
-var mapIconBase = '/wp-content/themes/libraries/images/';
+var mapIconBase = 'http://mitlibraries.seangw.com/wp-content/themes/libraries/images/';
 
 (function($){
 
@@ -20,7 +20,11 @@ var Core = {
 		Core.linkTabs();
 		Core.buildUberMenu();
 		
+		Core.buildLocationGallery();
+		
 		Core.fixSidebar();
+		
+		Core.buildDatePicker();
 		
 		Core.buildMap();
 		
@@ -42,18 +46,6 @@ var Core = {
 			console.log(par.height());
 			$(this).height(par.height()+5);
 		});	
-		
-		$(".hrList tbody tr").each(function() {
-			var maxHeight = 0;
-			$(this).find("td:not(.name)").each(function() {
-				var td = $(this);
-				maxHeight = Math.max(td.height(), maxHeight);
-			});
-
-			$(this).find("td:not(.name)").each(function() {
-				$(this).height(maxHeight);
-			});
-		});
 	},	
 	
 	buildMap: function() {
@@ -99,7 +91,7 @@ var Core = {
 			
 			if ($(this).hasClass("btn-warning")) {
 				$(this).toggleClass("btn-warning", false);
-				$(this).html("Hide map");
+				$(this).html("Hide Map");
 				$("#stage").toggleClass("activeMap", true);
 				Core.showMap();
 				location.hash = "!map";
@@ -108,7 +100,7 @@ var Core = {
 				
 			} else {
 				$(this).toggleClass("btn-warning", true);
-				$(this).html("Show map");
+				$(this).html("Show Map");
 				$("#stage").toggleClass("activeMap", false);
 				Core.hideMap();
 				// reset hash
@@ -147,11 +139,6 @@ var Core = {
 		needMap = 0;		
 		
 		Core.buildMarkers();
-		
-		google.maps.event.addListener(map, 'idle', function() { // remove .gm-style added by GMAPs API
-    		jQuery('.gm-style').removeClass('gm-style');
-		});
-		
 	},
 	
 	buildMarkers: function() {
@@ -176,13 +163,13 @@ var Core = {
 				maxWidth: 280,
 				pixelOffset: new google.maps.Size(-140,-181),
 				boxStyle: {
-					//background: 'url(http://mitlibraries.seangw.com/wp-content/themes/libraries/images/infobox.png)',
+					background: 'url(http://mitlibraries.seangw.com/wp-content/themes/libraries/images/infobox.png)',
 					opacity: 1,
 					
-					//width: "280px",
-					//height: "180px",
+					width: "280px",
+					height: "180px",
 				},
-				closeBoxURL: mapIconBase + "close-sfw.gif",
+				closeBoxURL: "http://mitlibraries.seangw.com/wp-content/themes/libraries/images/close.gif",
 				closeBoxMargin: "4px 4px 4px 4px",
 				infoBoxClearance: new google.maps.Size(1,1),
 				isHidden: false,
@@ -190,25 +177,16 @@ var Core = {
 				enableEventPropagation: false
 			});
 			
-			var activeMarker = new google.maps.MarkerImage(mapIconBase + 'map-marker-active.png');
-
-			var defaultMarker = new google.maps.MarkerImage(mapIconBase + 'map-marker-default.png');
+			
 			
 			
 			var marker = new google.maps.Marker({
 				position: latlng,
 				map: map,
-				icon: defaultMarker,
+				icon: mapIconBase + 'map-icon.png',
 				html: description,
 				id: id,
 				title: name
-			});
-			
-			google.maps.event.addListener(marker, "click", function () {
-				for (var i=0; i<arMarkers.length; i++) {
-					arMarkers[i].setIcon(defaultMarker);
-					}
-					this.setIcon(activeMarker);
 			});
 			
 			google.maps.event.addListener(marker, 'click', function() {
@@ -220,17 +198,6 @@ var Core = {
 				lastMarker = infoBox;
 				infoBox.open(map, marker);
 				
-			});
-			
-			google.maps.event.addListener(map, 'click', function() {
-				if(infoBox) {
-					infoBox.close();
-					marker.setIcon(defaultMarker);
-				}					
-			});
-			
-			google.maps.event.addListener(infoBox, "closeclick", function() {
-				marker.setIcon(defaultMarker);
 			});
 			
 			arMarkers.push(marker);
@@ -247,10 +214,50 @@ var Core = {
 		$("#map").slideUp(200);
 	},
 	
+	buildDatePicker: function() {
+		$("#hourCalendar").glDatePicker({
+				showAlways: true,
+				selectedDate: todayDate,
+				
+				prevArrow: '<i class="icon-arrow-left"></i>',
+				nextArrow: '<i class="icon-arrow-right"></i>',
+				dowNames: "SMTWTFS",
+				dowOffset: 1,
+				onClick: function(target, cell, date, date2) {
+					var newDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+					
+					var path = window.location.pathname;
+					var newUrl = path+"?d="+newDate;
+
+					window.location = newUrl;
+				}
+				
+		});
+		
+	},
+	
 	fixSidebar: function() {
 		$(".sidebarWidgets").each(function() {
 			$(this).find(".widget:last").toggleClass("lastWidget", true);
 		});
+	},
+	
+	buildLocationGallery: function() {
+		$(".slideshow").cycle({
+			fx: "fade",
+			speed: 1500,
+			pause: 0,
+			/*
+			pager: "#slideshowNav",
+			
+			pagerAnchorBuilder: function(idx, slide) {
+				var obj = $(slide);
+				
+				return "<a href='#' class='thumb'><img src='"+obj.attr('data-thumb')+"' width='38' height='38' /></a>";
+			}
+			*/
+
+		});		
 	},
 	
 	buildUberMenu: function() {
@@ -280,10 +287,10 @@ var Core = {
 	},
 	
 	linkTabs: function() {
-		$(".tabnav h2 a").click(function(e) {
+		$(".tabnav a").click(function(e) {
 			e.preventDefault();
-			var par = $(this).parent().parent();
-			var container = par.parent().parent();
+			var par = $(this).parent();
+			var container = par.parent();
 			
 			container.find("li.active").toggleClass("active", false);
 			par.toggleClass("active", true);
@@ -292,7 +299,7 @@ var Core = {
 			
 			var tar = $(id);
 			
-			var contentPar = tar.parent().parent();
+			var contentPar = tar.parent();
 			contentPar.find(".tab.active").toggleClass("active", false);
 			
 			tar.toggleClass("active", true);
@@ -300,27 +307,46 @@ var Core = {
 	},
 	
 	linkExpandable: function() {
-
-		// Based on Jack Moore's accordion: http://www.jacklmoore.com/notes/jquery-accordion-tutorial/
-
-		$(".expandable h3").click(function(e){
+		var num = 0;
+		
+		var hash = window.location.hash;
+		hash = hash.replace("#", "");
+		
+		$(".expandable h3").click(function(e) {
 			e.preventDefault();
-			$(this).closest("section").find(".content").not(":animated").slideToggle();
-			$(this).closest("section").toggleClass("active");
-			//var $clickLink = $(this).closest("section").find("a").attr("id");
-			//window.location.hash = $clickLink;
-		});
-
-		$(".expandable h3 > a").each(function(){
-			var $title = $(this).html().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
-			var $link = $(this);
-			$(this).attr("id", $title);
-
-			if(window.location.hash.substring(1) == $title) {
-				$($link).closest("h3").click();
-				console.log("the hash is: " + $title);
+			
+			var par = $(this).parent();
+			var hash = par.attr("data-anchor");
+			
+			if (par.hasClass("active")) {
+				par.toggleClass("active", false);
+				par.find(".content").slideUp(200);
+				window.location.hash = "";
+			} else {
+				par.toggleClass("active", true);
+				par.find(".content").slideDown(200);
+				window.location.hash = "#"+hash;
 			}
 		});
+		
+		$(".expandable").each(function() {
+			var obj = $(this);
+			var h3 = obj.find("h3:first");
+			
+			var setHash = encodeURIComponent(h3.html());
+			obj.attr("data-anchor", setHash);
+
+			if (setHash == hash) {
+				obj.toggleClass("active", true);
+				obj.find(".content").slideDown(200);
+				$(document.body).animate({
+					'scrollTop': $(obj).offset().top - 50
+				}, 500);
+			}
+			
+			num++;
+		});
+	
 
 	},
 	
@@ -329,8 +355,7 @@ var Core = {
 			e.preventDefault();
 			document.location = "/";
 		});
-	},
-	
+	}
 }
 
 window.Core = Core;

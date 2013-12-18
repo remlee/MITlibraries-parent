@@ -19,14 +19,14 @@ $isRoot = $section->ID == $post->ID;
 
 get_header(); ?>
 
-		<div id="breadcrumb" class="inner" role="navigation" aria-label="breadcrumbs">
+		<div id="breadcrumb" class="inner">
 			<a href="/">Libraries home</a>
 			&raquo; <?php showBreadTitle(); ?>
 		</div>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 		
-		<div id="stage" class="inner row" role="main">
+		<div id="stage" class="inner row">
 	
 			<div class="title span12">
 				<?php if ($isRoot): ?>

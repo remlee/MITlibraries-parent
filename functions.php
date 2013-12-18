@@ -28,9 +28,7 @@ $gStudy24Url = "/study/24x7/";
 
 // use newsBlog for live site
  $newsBlog = 7;
- $mainSite = 1;
 
-//$siteRoot = "/var/www/vhosts/seangw.com/mitlibraries";
 $siteRoot = $_SERVER['DOCUMENT_ROOT'];
 foreach(glob($siteRoot."/wp-content/themes/libraries/lib/*.php") as $file) require_once($file);
  
@@ -162,54 +160,7 @@ function twentytwelve_scripts_styles() {
 	 */
 	wp_enqueue_style( 'twentytwelve-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentytwelve-style' ), '20121010' );
 	$wp_styles->add_data( 'twentytwelve-ie', 'conditional', 'lt IE 9' );
-
-	/* Page-specific CSS */
-
-	if(is_page('hours')) {
-		wp_enqueue_style('datepicker', get_template_directory_uri() . '/libs/datepicker/styles/glDatePicker.mitlibraries.css', false, false, all);
-	}
-	
-	/*  Register JS */
-	
-	// Deregister WP Core jQuery, load Google's because it is faster
-	wp_deregister_script('jquery');
-	wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', array(), '1.8.3', false);
-
-	wp_register_script('modernizr', get_template_directory_uri() . '/js/modernizr.js', array(), '2.6.2', false);
-
-	wp_register_script('datepicker', get_template_directory_uri() . '/libs/datepicker/glDatePicker.min.js', array('jquery'), '2.0', true);
-
-	wp_register_script('build_datepicker', get_template_directory_uri() . '/js/build.datepicker.js', array('jquery'), '2.0', true);
-	 
-	wp_register_script('sticky', get_template_directory_uri() . '/js/sticky/jquery.sticky.js', array('jquery'), false, true);
-
-	wp_register_script('stickyhours', get_template_directory_uri() . '/js/sticky/sticky-hours.menu.js', array('jquery'), false, true);
-
-	wp_register_script('cookieJS', get_template_directory_uri() . '/js/sticky/scrollStick/jquery.cookie.js', array('jquery'), false, true);
-
-	wp_register_script('scrollStickHours', get_template_directory_uri() . '/js/sticky/scrollStick/hours.scrollStick.js', array('jquery'), false, true);
-
-	wp_register_script('nullAlt', get_template_directory_uri() . '/js/nullAlt.js', array('jquery'), false, false);
-
-	/* All-site JS */
-	
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('modernizr');
-	wp_enqueue_script('nullAlt');
-
-	/* Page-specific JS */
-	
-	if (is_page('hours')) {
-		wp_enqueue_script('datepicker');
-		wp_enqueue_script('build_datepicker');
-		wp_enqueue_script('sticky');
-		wp_enqueue_script('stickyhours');
-		wp_enqueue_script('cookieJS');
-		wp_enqueue_script('scrollStickHours');
-		}
-	
 }
-
 add_action( 'wp_enqueue_scripts', 'twentytwelve_scripts_styles' );
 
 /**
@@ -266,17 +217,17 @@ function twentytwelve_widgets_init() {
 		'name' => __( 'Main Sidebar', 'twentytwelve' ),
 		'id' => 'sidebar-1',
 		'description' => __( 'Appears on posts and pages except the optional Front Page template, which has its own widgets', 'twentytwelve' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s" role="complementary">',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
 	) );
 
 	register_sidebar( array(
 		'name' => __( 'First Front Page Widget Area', 'twentytwelve' ),
 		'id' => 'sidebar-2',
 		'description' => __( 'Appears when using the optional Front Page template with a page set as Static Front Page', 'twentytwelve' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s" role="complementary">',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
@@ -286,7 +237,7 @@ function twentytwelve_widgets_init() {
 		'name' => __( 'Second Front Page Widget Area', 'twentytwelve' ),
 		'id' => 'sidebar-3',
 		'description' => __( 'Appears when using the optional Front Page template with a page set as Static Front Page', 'twentytwelve' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s" role="complementary">',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
@@ -426,18 +377,6 @@ function twentytwelve_entry_meta() {
 }
 endif;
 
-if (!function_exists('is_child_page')) {
-	function is_child_page() {
-	global $post;     // if outside the loop
-
-	if ( is_page() && $post->post_parent ) {
-    return $post->post_parent;
-	} else {
-    return false;
-	}
-}
-}
-
 /**
  * Extends the default WordPress body class to denote:
  * 1. Using a full-width layout, when no active widgets in the sidebar
@@ -454,12 +393,7 @@ if (!function_exists('is_child_page')) {
  * @return array Filtered class values.
  */
 function twentytwelve_body_class( $classes ) {
-	global $post;
 	$background_color = get_background_color();
-
-	if ( isset( $post ) ) {
-		$classes[] = $post->post_type . '-' . $post->post_name;
-	}
 
 	if ( ! is_active_sidebar( 'sidebar-1' ) || is_page_template( 'page-templates/full-width.php' ) )
 		$classes[] = 'full-width';
@@ -470,22 +404,6 @@ function twentytwelve_body_class( $classes ) {
 			$classes[] = 'has-post-thumbnail';
 		if ( is_active_sidebar( 'sidebar-2' ) && is_active_sidebar( 'sidebar-3' ) )
 			$classes[] = 'two-sidebars';
-	}
-
-	if (is_child_theme()) {
-		$classes[] = 'childTheme';
-	}
-	
-	if(is_child_page()) {
-		$classes[] = 'childPage';
-	}
-	
-	if (is_page_template('page-selfTitle.php')) {
-		$classes[] = 'boxSizingOn';
-	}
-
-	if (is_page_template('page-location.php')) {
-		$classes[] = 'locationPage';
 	}
 
 	if ( empty( $background_color ) )
@@ -503,8 +421,6 @@ function twentytwelve_body_class( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'twentytwelve_body_class' );
-
-
 
 /**
  * Adjusts content_width value for full-width and single image attachment
@@ -712,4 +628,3 @@ function getExpert($expert) {
 	print_r($qExpert);
 	
 }
-

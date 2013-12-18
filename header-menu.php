@@ -16,7 +16,7 @@
 <html class="ie ie8" <?php language_attributes(); ?>>
 <![endif]-->
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="no-js">
 <!--<![endif]-->
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -34,6 +34,7 @@
 <link href="<?php bloginfo('template_directory') ?>/libs/bootstrap/css/bootstrap.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/libs/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/libs/fontawesome/css/font-awesome.css" rel="stylesheet" media="all">
+<link href="/wp-content/themes/libraries/libs/fontawesome-MITLibraries/style.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/libs/datepicker/styles/glDatePicker.default.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/libs/lightbox/css/lightbox.css" rel="stylesheet" media="all">
 <link href="<?php bloginfo('template_directory') ?>/css/main.css" rel="stylesheet" media="all">
@@ -52,7 +53,7 @@
 <body <?php body_class(); ?>>
 	<div id="container">
 		<header class="row">
-			<h1 id="logo"><?php echo get_bloginfo( 'name', 'display' ) ?></h1>
+			<div id="logo"><?php echo get_bloginfo( 'name', 'display' ) ?></div>
 			<nav id="site-navigation" class="span12 main-navigation" role="navigation">
 				<h3 class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></h3>
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentytwelve' ); ?>"><?php _e( 'Skip to content', 'twentytwelve' ); ?></a>
@@ -60,10 +61,10 @@
 				
 			</nav><!-- #site-navigation -->
 			<div id="toolbox">
-				<a href="/barton-account">Your Account</a>
+				<a class="yourAccount" href="/barton-account">Your Account</a>
 				<div id="asktell">
-					<img class="hidden-phone" src="<?php bloginfo('template_directory') ?>/images/ask-tell.png" alt="Ask Us / Tell Us" usemap="#asktell"/>
-					<img class="visible-phone" src="<?php bloginfo('template_directory') ?>/images/ask-tell-mobile.png" alt="Ask Us / Tell Us" usemap="#asktellmobile"/>
+					<img class="hidden-phone" src="<?php bloginfo('template_directory') ?>/images/ask-tell.png" alt="" usemap="#asktell"/>
+					<img class="visible-phone" src="<?php bloginfo('template_directory') ?>/images/ask-tell-mobile.png" alt="" usemap="#asktellmobile"/>
 					<map name="asktell">
 						<area shape="poly" coords="0,2,80,3,65,24,1,26" href="<?php echo $askUrl ?>" alt="Ask Us" title="Ask Us"   />
 						<area shape="poly" coords="150,0,150,23,71,22,84,0" href="/suggestions" alt="Tell Us" title="Tell Us"   />

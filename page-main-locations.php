@@ -24,14 +24,14 @@ get_header(); ?>
 		var showMap = <?php echo $showMap; ?>;
 	</script>	
 
-		<div id="breadcrumb" class="inner" role="navigation" aria-label="breadcrumbs">
+		<div id="breadcrumb" class="inner">
 			<a href="/">Libraries home</a>
 			&raquo; <?php showBreadTitle(); ?>
 		</div>
 
-		<div id="stage" class="inner thinSidebar row" role="main">
+		<div id="stage" class="inner thinSidebar row">
 			<div class="title span12">
-				<h1>Locations</h1>
+				<h2>Locations</h2>
 				<div class="extraInfo">
 					<a id="hoursLink" class="inlineLink" href="/hours/"><i class="icon-arrow-right"></i> See all library hours</a>
 					<a id="showMap" class="hidden-phone btn btn-warning btnShow" href="#">Show map</a>
@@ -104,7 +104,7 @@ get_header(); ?>
 							<div class="description">
 								<div class="infoContent">
 									<?php if ($val != ""): ?>
-									<div class="infoImage" style="background-image: url(<?php echo $val; ?>); background-repeat: no-repeat;"></div>
+									<div class="infoImage" style="background-image: url(<?php echo $val; ?>);"></div>
 									<?php endif; ?>
 									<div class="content">
 										<h3><a href="<?php echo $pageLink ?>"><?php echo $name; ?></a> <i class="icon-arrow-right"></i></h3>
@@ -153,7 +153,7 @@ get_header(); ?>
 							$pageLink = get_permalink($pageID);
 							
 							$temp = $post;
-							$hasHours = hasHours($locationId, date("Y-m-d"));
+							$hasHours = hasHours($locationId);
 							$hoursToday = getHoursToday($locationId);
 							$isOpen = getOpen($locationId);
 							$post = $temp;
@@ -168,17 +168,17 @@ get_header(); ?>
 							
 							
 								<?php if ($hasHours): ?>
-								<div class="hours">Today&rsquo;s hours: <?php echo $hoursToday; ?></div>
+								<div class="hours">Todays hours: <?php echo $hoursToday; ?></div>
 								<?php else: ?>
 								<div class="hours">TBA</div>
 								<?php endif; ?>
-								<h2><a href="<?php echo $pageLink ?>" class="locationLink"><?php the_title(); ?></a></h2>
+								<h3><a href="<?php echo $pageLink ?>"><?php the_title(); ?></a><i class="icon-arrow-right"></i></h3>
 								<div class="sub"><?php echo $subject ?></div>
 								<?php if ($phone != ""): ?>
 								<?php echo $phone ?>
-								<?php endif; ?><a class="map" data-target="<?php echo $locationId; ?>" href="#!<?php echo $slug; ?>">Map: <?php echo $building ?></a>
+								<?php endif; ?><a class="map" data-target="<?php echo $locationId; ?>" href="#!<?php echo $slug; ?>">Map: <?php echo $building ?></a><i class="icon-arrow-right"></i>
 								<?php if ($study24 == 1): ?>
-									<a class="space247" href="<?php echo $gStudy24Url; ?>" alt="This location contains one or more study spaces available 24 hours a day, seven days a week. Click the link for more info." title="Study 24/7">Study 24/7</a>
+									<a class="space247" href="<?php echo $gStudy24Url; ?>">Study 24/7</a>
 								<?php endif; ?>
 
 							</li>	
@@ -221,7 +221,7 @@ get_header(); ?>
 						$noHours = cf("no_hours");
 						
 						$temp = $post;
-						$hasHours = hasHours($locationId, date("Y-m-d"));
+						$hasHours = hasHours($locationId);
 						$hoursToday = getHoursToday($locationId);
 						$isOpen = getOpen($locationId);
 						$post = $temp;
@@ -255,9 +255,7 @@ get_header(); ?>
 				</div>
 
 				<div id="sidebarContent" class="span3">
-					<div class="findStudySpace">
-						<h3><a href="/study/" class="widgetButton">Find a study space</a></h3>
-					</div>
+					<a href="/study/" class="widgetButton"><img src="<?php bloginfo('template_directory') ?>/images/btn-study-space.png" alt="Find a Study Space" /></a>
 				</div>
 				<?php get_sidebar(); ?>			
 		</div>		

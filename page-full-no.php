@@ -19,8 +19,9 @@ $isRoot = $section->ID == $post->ID;
 
 get_header(); ?>
 
-		<div id="breadcrumb" class="inner" role="navigation" aria-label="breadcrumbs">
-			<?php wsf_breadcrumbs(" &raquo; ", ""); ?>
+		<div id="breadcrumb" class="inner">
+			<a href="/">Libraries home</a>
+			&raquo; <?php showBreadTitle(); ?>
 		</div>
 
 		<?php while ( have_posts() ) : the_post(); ?>
@@ -29,9 +30,9 @@ get_header(); ?>
 	
 			<div class="title span12">
 				<?php if ($isRoot): ?>
-				<h1><?php echo $section->post_title; ?></h1>
+				<h2><?php echo $section->post_title; ?></h2>
 				<?php else: ?>
-				<h1><a href="<?php echo get_permalink($section->ID) ?>"><?php echo $section->post_title; ?></a></h1>
+				<h2><a href="<?php echo get_permalink($section->ID) ?>"><?php echo $section->post_title; ?></a></h2>
 				<?php endif; ?>
 			</div>
 			

@@ -18,14 +18,14 @@ $section = get_post($pageRoot);
 
 get_header(); ?>
 
-		<div id="breadcrumb" class="inner" role="navigation" aria-label="breadcrumbs">
+		<div id="breadcrumb" class="inner">
 			<a href="/">Libraries home</a>
 			&raquo; <?php showBreadTitle(); ?>
 		</div>
 
-		<div id="stage" class="inner thinSidebar row" role="main">
+		<div id="stage" class="inner thinSidebar row">
 			<div class="title span12">
-				<h1><?php the_title(); ?></h1>
+				<h2><?php the_title(); ?></h2>
 				<div class="extraInfo">
 					<a href="/hours/"><i class="icon-arrow-right"></i> See all library hours</a>
 				</div>
@@ -104,7 +104,7 @@ get_header(); ?>
 										<?php echo $description; ?>
 									</div>
 									<?php if ($study24 == 1): ?>
-										<a class="space247 hidden-phone" href="<?php echo $gStudy24Url; ?>" alt="This location contains one or more study spaces available 24 hours a day, seven days a week. Click the link for more info." title="Study 24/7">Study 24/7</a>
+										<a class="space247 hidden-phone" href="<?php echo $gStudy24Url; ?>">Study 24/7</a>
 									<?php endif; ?>
 										<?php if ($reserveUrl != ""): ?>
 												<a class="reserve hidden-phone" href="<?php echo $reserveUrl; ?>"><?php echo $reserveText; ?></a>
@@ -114,7 +114,7 @@ get_header(); ?>
 									<div class="info">
 										<div class="infoCol first">
 										<?php if ($study24 == 1): ?>
-											<a class="space247 visible-phone" href="<?php echo $gStudy24Url; ?>" alt="This location contains one or more study spaces available 24 hours a day, seven days a week. Click the link for more info." title="Study 24/7">Study 24/7</a>
+											<a class="space247 visible-phone" href="<?php echo $gStudy24Url; ?>">Study 24/7</a>
 										<?php endif; ?>
 										
 											<h4><?php echo $subject ?></h4>
@@ -123,7 +123,7 @@ get_header(); ?>
 												<?php echo $phone ?><br/>
 												<?php endif; ?>
 												Show on map: <a href="/locations/#!<?php echo $slug; ?>"><?php echo $building ?></a><br/>
-												<?php if ($hoursToday != "" && strtolower($hoursToday) != "tba" && strtolower($hoursToday) != "closed"): ?>
+												<?php if ($hoursToday != "" && strtolower($hoursToday) != "closed"): ?>
 												<span class="hours">Open today<br/>
 												<?php echo $hoursToday; ?></span>
 												<?php endif; ?>
@@ -135,14 +135,14 @@ get_header(); ?>
 
 										<?php if ($individual != ""): ?>
 										<div class="infoCol hidden-phone">
-											<h4>Total seats</h4>
+											<b>Total seats</b><br/>
 											<?php echo $individual; ?>
 										</div>
 										<?php endif; ?>
 										
 										<?php if ($spaces != ""): ?>
 										<div class="infoCol hidden-phone">
-											<h4>Group spaces</h4>
+											<b>Group spaces</b><br/>
 											<?php echo $spaces; ?>
 										</div>
 										<?php endif; ?>

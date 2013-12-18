@@ -30,15 +30,14 @@
 		<script type="text/javascript" src="scripts/jquery.infieldlabel.js"></script>
 		<!-- 
 			ga_discovery.js allows for event tracking within the discovery environment.
-			Updated 7/23/13 - MB
+			Updated 6/13/11 - MB
 		 -->
-		<script type="text/javascript" src="scripts/ga_discovery.js?130723b"></script>
+		<script type="text/javascript" src="scripts/ga_discovery.js?130611"></script>
 		<!-- 
 			discovery_router.js connects each tab's search form with its resource.
-			Updated 6/13/13 - MB
+			Updated 6/13/11 - MB
 		 -->
 		<script type="text/javascript" src="scripts/discovery-router.js?130710b"></script>
-		<script type="text/javascript" src="/wp-content/themes/libraries/js/nullAlt.js"></script>
 		<!--The meta tag below is to allow Google Webmaster tools to know we own this site - DD 20120329-->
 		<meta name="google-site-verification" content="82Cv3HFWvcefC_9XauvglcfB4h3o0uuiC3nKWWkL_eE" />
 		<!--
@@ -62,7 +61,7 @@
 		<a href="#searchcontainer" id="skipnav">Skip navigation</a>
 		
 		<!-- Logo -->
-		<h1 class="siteName"><a href="/">MIT Libraries</a></h1> 
+		<a href="/"><img src="/images/logo_screen.png" width="134" height="58" alt="MIT Libraries" id="logo" class="png" /></a>        
  		<img src="/images/logo_printonly.gif" width="172" height="72" alt="" class="printonly" />
 
 		<!-- Main nav -->
@@ -70,7 +69,7 @@
 			<li><a href="/barton-account">YOUR ACCOUNT</a></li>
 			<li><a href="/hours">HOURS</a></li>
 			<li><a href="/locations">LIST OF LIBRARIES</a></li>
-			<li><a href="/about/site-search">SITE SEARCH</a></li>
+			<li><a href="/site-index.html">SITE SEARCH</a></li>
 		</ul>
 		
 		<!-- Ask us / Tell us navigation area -->
@@ -146,7 +145,7 @@
 								<br>
 								Looking for non-MIT items?<br><a href="http://mit.worldcat.org/">MIT's WorldCat</a><br>
 								<br>
-								<h3 class="needHelp">Need help?</h3>
+								Need help?
 								<ul>
 									<li><a href="/research-guides">Research guides</a></li>
 									<li><a href="/experts">Subject experts</a></li>
@@ -157,7 +156,7 @@
 									<table>
 										<tr>
 											<th scope="row"><a href="/bartonplus">BartonPlus</a></th>
-											<td>Searches the Barton Catalog, as well as most MIT-licensed e-resources, including e-books and full-text articles. Extensive, but does not index ALL materials available to the MIT community. <a href="http://libguides.mit.edu/about-bartonplus">More about BartonPlus</a></td>
+											<td>Searches the Barton Catalog, as well as most MIT-licensed e-resources, including e-books and full-text articles. Extensive, but does not index ALL materials available to the MIT community.</td>
 										</tr>
 									</table>
 								</span>
@@ -377,7 +376,7 @@
 												<input type="radio" name="searchTarget" checked="checked" id="dspace" value="dspace" class="radio" rel="Enter first words in title (ex. journal of urban)" /><label for="dspace"><strong>DSpace@MIT:</strong> MIT theses and scholarly papers</label>
 											</div>
 											<div class="radiorow floatwrapper">
-												<input type="radio" name="searchTarget" id="dome" value="dome" class="radio" rel="Ex: hagia sophia, kevin lynch" /><label for="dome"><strong>Dome:</strong> MIT Libraries’ digital images, maps, etc.</label>
+												<input type="radio" name="searchTarget" id="dome" value="dome" class="radio" rel="Ex: hagia sophia, kevin lynch" /><label for="dome"><strong>Dome:</strong> MIT-digitized images, maps, etc.</label>
 											</div>
 											<div class="radiorow floatwrapper">
 												<input type="radio" name="searchTarget" id="archnet" value="archnet" class="radio" rel="Ex: mosque" /><label style="width:350px;" for="archnet"><strong>ArchNet Digital Library:</strong> architecture in Muslim societies</label>
@@ -406,7 +405,7 @@
 						    			</tr>
 						    			<tr>
 						    				<th scope="row"><a href="http://dome.mit.edu/">Dome</a></th>
-						    				<td>Search digital images, maps, and other documents from the MIT Libraries’ collections.</td>
+						    				<td>Search the MIT Libraries' digitized images including photographs, maps, documents and more.</td>
 						    			</tr>
 						    			<tr>
 						    				<th scope="row"><a href="https://archnet.org/">Archnet</a></th>
@@ -465,23 +464,42 @@
 				<div class="contentshadowmid">
 		
 					<!-- Content area (at right, with gradient) -->
-					<div id="content" class="mainContent">
+					<div id="content">
+					                    <?php
+										$args = array(
+											"post_type" => "post",
+											"meta_key" => "active",
+											"meta_value" => true,
+											"category_name" => "Alerts"
+										);
+										
+										$alerts = new WP_Query( $args );
+																			
+										while ($alerts->have_posts()): $alerts->the_post();
+										?>
+										<h1 id="furlough"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+										<?php 
+											
+										endwhile;
+										?>
+										
+										
+										<?php
+										
+										?>
+						<h1>Library Services</h1>
 						
-						<?php get_template_part('inc/alert'); ?>
-
-						<h2>Library Services</h2>
-						
-						<h3 class="allservices"><a href="/about/site-search">Services A-Z</a></h3>
+						<h2 class="allservices"><a href="/services-all">Services A-Z</a></h2>
 			
 						<!-- List of Library Services, first row -->
 						<div class="libraryservices columns three-column floatwrapper">
 						  <!-- Guides list -->
 						  <div class="column">
-						   <h3><a href="/locations">Hours &amp; locations</a></h3>
+						   <h2><a href="/locations">Hours &amp; locations</a></h2>
 						   <ul class="linklist">
 						    <li><a href="/hours">Hours</a></li>
 						    <li><a href="/locations">List of libraries</a></li>
-						    <li><a href="/study">Study spaces</a> <span class="pipe">|</span> <a href="/study/reserve/">Reserve a group study space</a></li>
+						    <li><a href="/studyspaces">Study spaces</a></li>
 						    <li><a href="/exhibits">Exhibits &amp; galleries</a></li>
 						    <li><a href="/map">Map</a></li>
 						  </ul>
@@ -489,28 +507,27 @@
 
 						<!-- Borrow or request list -->
 						<div class="column">
-						  <h3><a href="/borrow">Borrow &amp; request</a></h3>
+						  <h2><a href="/borrow">Borrow &amp; request</a></h2>
 						  <ul class="linklist">
-						    <li><a href="/barton-account">Your Account</a></li>
+						    <li><a href="/barton-account">Your Account: renew books &amp; more</a></li>
 						    <li><a href="/getit">Request from non-MIT libraries:</a> <a href="/ilb">ILB,</a> <a href="/ordering/borrowdirect.html">BorrowDirect</a></li>
 						    <li><a href="http://libguides.mit.edu/circfaq">Circulation FAQ</a></li>
 						    <li><a href="/reserves">Course reserves &amp; TIP FAQ</a></li>
 						    <li><a href="/ordering/non-mit-access/index.html">Visit non-MIT libraries:</a> <a href="/harvard"> Harvard,</a> <a href="/blc">BLC</a></li>
-						    <li><a href="/suggest-purchase">Suggest a purchase</a></li>
-						    <li><a href="/borrow">More&#8230;</a></li>
+						    <li><a href="/borrow">More borrow &amp; request options</a></li>
 						  </ul>
 						</div>
 
 						<!-- Help list -->
 						<div class="column last">
-						  <h3><a href="/research-support">Expert help</a></h3>
+						  <h2><a href="/research-support">Expert help</a></h2>
 						  <ul class="linklist">
 						    <li><a href="/ask">Ask Us!</a></li>
 						    <li><a href="/experts">Librarians &amp; subject experts</a></li>
 						    <li><a href="/research-guides">Research guides: tools and databases for your topic</a></li>
 						    <li><a href="http://libguides.mit.edu/classguides">Class &amp; program guides</a></li>
 						    <li><a href="/about/faqs/remote.html">E-resource troubleshooting</a></li>
-						    <li><a href="/research-support">More&#8230;</a></li>
+						    <li><a href="/research-support">More expert help options</a></li>
 						  </ul>
 						</div>
 						</div>
@@ -520,40 +537,41 @@
 
 						 <!-- Tools list -->
 						 <div class="column">
-						  <h3><a href="/research-support">Publishing &amp; writing</a></h3>
+						  <h2><a href="/research-support">Publishing &amp; writing</a></h2>
 						  <ul class="linklist">
 						    <li><a href="scholarly">Scholarly publishing: open access &amp; copyright</a></li>
 						    <li><a href="http://dspace.mit.edu/">DSpace@MIT: MIT scholarly papers</a></li>
 						    <li><a href="/oapolicy">Faculty open access policy</a></li>
-						    <li><a href="http://libguides.mit.edu/publishing">Getting published: tools &amp; help</a></li>
+						    <li><a href="http://libguides.mit.edu/content.php?pid=42346&sid=311602">Getting published: tools &amp; help</a></li>
 						    <li><a href="/archives/thesis-specs/index.html">MIT thesis specifications</a></li>
-						    <li><a href="/research-support">More&#8230;</a></li>
+						    <li><a href="/research-support">More publishing &amp; writing options</a></li>
 						  </ul>                            
 						</div>
 
 
 						<!-- Publishing list -->
 						<div class="column">
-						  <h3><a href="/productivity-tools">Productivity tools</a></h3>
+						  <h2><a href="/productivity-tools">Productivity tools</a></h2>
 						  <ul class="linklist">
 						    <li><a href="/references">Citation software:</a> <a href="/endnote">EndNote,</a> <a href="/refworks">RefWorks,</a> <a href="/zotero">Zotero,</a> <a href="/mendeley">Mendeley</a></li>
 						    <li><a href="http://libguides.mit.edu/manage-info">Manage your information</a></li>
+						    <li><a href="/betas">Betas &amp; widgets</a></li>
 						    <li><a href="/apps">Apps for academics</a></li>
 						    <li><a href="/libx">LibX</a></li>
 						    <li><a href="/help/rss/barton/">New books RSS feeds</a></li>
-						    <li><a href="/productivity-tools">More&#8230;</a></li>
+						    <li><a href="/productivity-tools">More productivity tools</a></li>
 						  </ul>
 						</div>
 
 						<!-- Visit the library list -->
 						<div class="column last">
-						  <h3><a href="/about">About us</a></h3>
+						  <h2><a href="/about">About us</a></h2>
 						  <ul class="linklist">
 						    <li><a href="http://libguides.mit.edu/directory">Staff directory</a></li>
 						    <li><a href="/news">News</a></li>
 						    <li><a href="/calendar">Calendar of events: classes &amp; workshops</a></li>
 						    <li><a href="/about/guidelines.html">Guidelines for use</a></li>
-						    <li><a href="/about">More&#8230;</a></li>
+						    <li><a href="/about">More about us</a></li>
 						  </ul>
 						</div>
 						</div>
@@ -566,9 +584,115 @@
 		
 		<!-- Sidebar area on left -->
 		<div id="sidebar">
-			
-			<?php get_template_part( 'inc/homepage', 'news' ); ?>
+			<!-- News and events section -->
+			<div class="section">
+				<h2><a href="/news">News &amp; events</a></h2>
+				
+				<!-- MIT TechTV video, embedded using swfobject -->
+               <!--comment out blockvideo div when using a still image-->
+	<!--	   <div class="blockvideo">
+					<div id="flashholder">
+                         <p>You will need Adobe Flash Player and Javascript enabled to view this content.</p>
+                         <p><a href="http://www.adobe.com/go/EN_US-H-GET-FLASH" target="_blank">&gt; Download Adobe Flash Player</a></p>
+                    </div>
+				</div>-->
+<!--Be sure to comment out script when using a still image, and uncomment it when using a video.-->
+<!--
+<p><object name="ttvplayer" id="ttvplayer" type="application/x-shockwave-flash" allowScriptAccess="always" allowNetworking="all" allowFullScreen="true" height="165" width="240" data="http://www.kaltura.com/index.php/kwidget/wid/_203822/uiconf_id/1898102/entry_id/1_58wcbolh/"><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="allowFullScreen" value="true" /><param name="bgcolor" value="#000000" /><param name="movie" value="http://www.kaltura.com/index.php/kwidget/wid/_203822/uiconf_id/1898102/entry_id/1_58wcbolh/"/><param name="flashVars" value="autoPlay=false&streamerType=rtmp"/><a href="http://ttv.mit.edu">MIT Tech TV</a></object></p>
+--> 
+
+				<!--comment out blockimage div when using a video-->
+<?php
+	$newsTitle = get_field("news_title");
+	$newsPhoto = get_field("news_photo");
+	$newsUrl = get_field("news_photo_url");
+	
+	$newsFeedCount = get_field("news_feed_number");
+	
+	$numNews = 3;
+	
+	$arNews = array();
+
+	
+	for($i=1;$i<=$numNews;$i++) {
+		$nTitle = get_field("news_".$i);
+		$nUrl = get_field("news_".$i."_url");
+		
+		if ($nTitle != "" && $nUrl != "") {
+			$arNews[] = array(
+				"title" => $nTitle,
+				"url" => $nUrl
+			);
+		}
+	}
+?>				
+				<div class="blockimage">
+					<?php if ($newsPhoto != ""): ?>
+					
+						<?php if ($newsUrl != ""): ?>
+							<a href="<?php echo $newsUrl; ?>">
+						<?php endif; ?>
 						
+						<img src="<?php echo $newsPhoto; ?>"  alt="<?php echo $newsTitle; ?>">
+						
+						<?php if ($newsUrl != ""): ?>
+						</a>
+						<?php endif; ?>
+					<?php else: ?>
+						<!-- default news photo -->
+						<a href="/news/finals-survival-libraries/10129/"><img src="/images/features/cookies-with-canines.jpg"  alt="students petting a dog"</a>
+					<?php endif; ?>
+				</div>
+
+				<?php if ($newsTitle != "" && $newsUrl != ""): ?>
+				
+					<p><a href="<?php echo $newsUrl; ?>"><?php echo $newsTitle; ?></a></p>
+				<?php else: ?>
+					<!-- default news link -->
+					<p><a href="/news/finals-survival-libraries/10129/">Finals week survival kit from the MIT Libraries</a></p>
+					
+				<?php endif; ?>				
+
+<ul class="linklist">
+<!-- custom links -->
+<?php
+	foreach($arNews as $news):
+		$nTitle = $news["title"];
+		$nUrl = $news["url"];
+		
+		echo "<li><a href='$nUrl'>$nTitle</a></li>";
+	
+	endforeach;
+?>
+
+<!-- Auto links -->
+<?php
+if ($newsFeedCount > 0):
+	if ($newsBlog) switch_to_blog($newsBlog);
+	$args = array(
+		'post_type' => 'post',
+		'posts_per_page' => $newsFeedCount
+	
+	);
+	
+	$news = new WP_Query( $args );
+	
+	while($news->have_posts()):
+		$news->the_post();
+?>
+<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+<?php
+	endwhile;
+
+	if ($newsBlog) restore_current_blog();
+endif; // news feed count
+?>
+
+
+   <li><a href="/news/">More news</a> | <a href="/calendar">Calendar of events</a></li>
+				</ul>
+			</div>
+			
 			<!-- Ask the Expert section -->
 			<div class="section last">
 			<h2>Ask the expert</h2>
@@ -628,7 +752,7 @@ if ($arexpert) {
 			
 			<!-- Social networking links -->
 			<div id="socialnetworking">
-				<h2 class="follow">Follow MIT Libraries:</h2>
+				Follow MIT Libraries:
 				<ul class="floatwrapper">
 					<li><a href="http://twitter.com/mitlibraries" class="icon twitter" title="Twitter">Twitter</a></li>
 					<li><a href="/facebook" class="icon facebook" title="Facebook">Facebook</a></li>

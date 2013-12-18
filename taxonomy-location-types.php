@@ -9,12 +9,12 @@ $section = get_post($pageRoot);
 
 get_header(); ?>
 
-		<div id="breadcrumb" class="inner" role="navigation" aria-label="breadcrumbs">
+		<div id="breadcrumb" class="inner">
 			<a href="#">Libraries Home</a>
 			&raquo; <?php the_title(); ?>
 		</div>
 
-		<div id="stage" class="inner thinSidebar" role="main">
+		<div id="stage" class="inner thinSidebar">
 			<div class="title">
 				<h2>Locations</h2>
 				<div class="extraInfo">

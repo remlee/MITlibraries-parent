@@ -18,11 +18,12 @@ $isRoot = $section->ID == $post->ID;
 
 get_header(); ?>
 		<!-- Version 1.9 -->
-		<div id="breadcrumb" class="inner" role="navigation" aria-label="breadcrumbs">
+		<div id="breadcrumb" class="inner">
 			<a href="/">Libraries home</a>
 			&raquo; <?php showBreadTitle(); ?>
 		</div>
-
+<!-- commnt A -->
+<!--
 		<?php 
 			$objs = get_field("page_location");
 			
@@ -31,14 +32,18 @@ get_header(); ?>
 				'post_type' => 'any'
 			);
 			
-			$locPosts = new WP_Query($args);
-			
-		?>
-		
-		<?php while ( $locPosts->have_posts() ) : $locPosts->the_post(); ?>
+var_dump($objs);
+echo " // BREAK HERE ";
 
+			$posts = new WP_Query($args);
+var_dump($posts);			
+		?>
+-->
+<!-- comment B -->		
+		<?php while ( $posts->have_posts() ) : $posts->the_post(); ?>
+<!-- comment post -->
 			<?php get_template_part( 'content', 'location' ); ?>
 		
 		<?php endwhile; // end of the loop. ?>
-
+<!-- comment C -->
 <?php get_footer(); ?>
