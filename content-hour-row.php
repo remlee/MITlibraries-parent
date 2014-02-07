@@ -7,6 +7,12 @@
 							$locationId = get_the_ID();
 							$slug = $post->post_name;
 							
+							$locationName = strtolower(get_the_title());
+							$locationName = str_replace('&', '', $locationName);
+							$locationName = preg_replace("/[^a-z0-9_\s-]/", "", $locationName);
+							$locationName = preg_replace("/[\s-]+/", " ", $locationName);
+							$locationName = preg_replace("/[\s_]/", "-", $locationName);
+
 							$subject = cf("subject");
 							$phone = cf("phone");
 							$building = cf("building");
@@ -19,15 +25,19 @@
 							$pageLink = get_permalink($pageID);
 							
 							$temp = $post;
-							$hasHours = hasHours($locationId);
+
+							$hasHours = hasHours($locationId, date("Y-m-d", $today));
 							//$hasHours = 1;
 							//$hoursToday = getHoursToday($locationId);
 							//$isOpen = getOpen($locationId);
 							$post = $temp;							
 							
 							$showSpecial = 1;
+							$showMobileSpecial = 1;
+							$alert = trim(get_field("alert"));
 							
-							if ($hasHours && $noHours != 1): 
+							//if ($hasHours && $noHours != 1): 
+							if ($noHours != 1): 
 							
 								if ($rowOdd=="even") {
 									$rowOdd = "";
@@ -41,15 +51,17 @@
 									<td class="name">
 										<div class="nameHolder">
 											<h3><a href="<?php echo $pageLink; ?>"><?php the_title(); ?> <i class="icon-arrow-right"></i></a></h3>
+											<a class="anchor" id="<?php echo $locationName; ?>"></a>
 											<?php if ($phone != ""): ?>
 												<?php echo $phone ?><br/>
 											<?php endif; ?>
 										</div>
 										<a class="map" href="<?php echo $mapPage.$slug; ?>">Map: <?php echo $building ?> <i class="icon-arrow-right"></i></a>									
 										<?php if ($study24 == 1): ?>
-											<a class="space247" href="/study/24x7/">Study 24/7</a>
+											<a class="space247" href="/study/24x7/" alt="This location contains one or more study spaces available 24 hours a day, seven days a week. Click the link for more info." title="Study 24/7">Study 24/7</a>
 										<?php endif; ?>
-										
+										<!--
+										Today's hours for mobile
 										<div class="mobileToday">
 											<b>Today</b><br/>
 										<?php
@@ -57,12 +69,14 @@
 											
 											$temp = $post;									
 											
-											$message = getMessageDay($locationId, $curDay);
+											//echo "S: ".date("Y-m-d", $today)." ";
+											
+											$message = getMessageDay($locationId, $today);
 											
 											if ($message != "" ) {
 												
-												if ($showSpecial == 1) {
-													$showSpecial = 0;
+												if ($showMobileSpecial == 1) {
+													$showMobileSpecial = 0;
 																							
 													$msgStart = strtotime($message["start"]);
 													$msgEnd = strtotime($message["end"]);
@@ -100,7 +114,13 @@
 											}
 											$post = $temp;												
 										?>
-										</div>										
+										</div>		
+										-->										
+										<?php if ($alert != ""): ?>
+											<div class="libraryAlert">
+												<?php echo '<i class="icon-exclamation-sign"></i>'.$alert; ?>
+											</div>
+										<?php endif; ?>
 										
 									</td>
 	
@@ -122,11 +142,16 @@
 								$firstDay = "";
 								$temp = $post;									
 								
+								//echo "B: ".date("Y-m-d", $curDay)." ";
+								
 								$message = getMessageDay($locationId, $curDay);
+								
+								//print_r($message);
 								
 								if ($message != "" ) {
 									
 									if ($showSpecial == 1) {
+										
 										$showSpecial = 0;
 																				
 										$msgStart = strtotime($message["start"]);
@@ -161,7 +186,7 @@
 										echo "<div class='tdInside'><div class='$msgClass'>$msgName</div></div>";
 									}
 								} else {
-									echo "<div class='mobileHourDay'><b>".date("n/j", $curDay)."</b><br/>".getMobileHoursDay($locationId, $curDay)."</div>";
+									echo "<div class='mobileHourDay'><b>".date("D", $curDay)."<br/>".date("n/j", $curDay)."</b><br/>".getMobileHoursDay($locationId, $curDay)."</div>";
 									echo "<div class='fullHourDay'>".getHoursDay($locationId, $curDay)."</div>";
 								}
 								$post = $temp;									

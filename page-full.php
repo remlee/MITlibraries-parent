@@ -19,20 +19,19 @@ $isRoot = $section->ID == $post->ID;
 
 get_header(); ?>
 
-		<div id="breadcrumb" class="inner hidden-phone">
-			<a href="/">Libraries home</a>
-			&raquo; <?php showBreadTitle(); ?>
+		<div id="breadcrumb" class="inner hidden-phone" role="navigation" aria-label="breadcrumbs">
+			<?php wsf_breadcrumbs(" &raquo; ", ""); ?>
 		</div>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 		
-		<div id="stage" class="inner row">
+		<div id="stage" class="inner row" role="main">
 	
 			<div class="title span12">
 				<?php if ($isRoot): ?>
-				<h2><?php echo $section->post_title; ?></h2>
+				<h1><?php echo $section->post_title; ?></h1>
 				<?php else: ?>
-				<h2><a href="<?php echo get_permalink($section->ID) ?>"><?php echo $section->post_title; ?></a></h2>
+				<h1><a href="<?php echo get_permalink($section->ID) ?>"><?php echo $section->post_title; ?></a></h1>
 				<?php endif; ?>
 			</div>
 			

@@ -9,7 +9,7 @@ $section = get_post($pageRoot);
 
 get_header(); ?>
 
-		<div id="breadcrumb" class="inner">
+		<div id="breadcrumb" class="inner" role="navigation" aria-label="breadcrumbs">
 			<a href="#">Libraries Home</a>
 			&raquo; <?php the_title(); ?>
 		</div>

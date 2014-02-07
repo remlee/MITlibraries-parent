@@ -7,39 +7,26 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
- 
- 
- 
-@media (min-width: 768px) and (max-width: 979px) {
-
-}
-
-@media (max-width: 767px) {
-
-}
-
-/* Large Desktop */
-@media (min-width: 1200px) {
-
-}
-
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
-
-}
-
-/* landscape phone to portrait tablet */
-@media (max-width: 767px) {
-
-}
 
 /* Landscape phone and down -- MOBILE */
 @media (max-width: 480px) {
+
+	.siteTitle,
+	.pageTitle {
+		background: #fff;
+		box-shadow: 0 0 5px #333;
+  	color: #000;
+  	padding: 0.5em;
+  	text-align: center;
+	}
+
+	.siteTitle h1 {
+		margin: 0 auto;
+	}
+
 	#locationsHome {
 		width: 100%;
 	}
-
-	
 
 	.studyList>li {
 		height: auto;
@@ -69,7 +56,8 @@
 		line-height: 18px;
 	}
 	
-	#breadcrumb {
+	#breadcrumb,
+	.betterBreadcrumbs {
 		display: none;
 	}
 
@@ -133,15 +121,14 @@
 	}	
 	
 	.title {
-		position: relative;
 		background: #fff;
 		color: #333;
 		font-size: 17px;
-		line-height: 20px;
-		padding: 10px 5px 5px 0px !important;
 		height: auto;
-		margin-bottom: 5px;
-		
+		line-height: 20px;
+		padding: 0;
+		position: relative;
+		margin: 0.5em 0;
 	}
 	
 	.title .extraInfo {
@@ -161,9 +148,10 @@
 		display: none;
 	}
 	
+	.title h1 .libraryName,
+	.title h1,
 	.title h2 {
 		font-size: 17px;
-		font-weight: bold !important;
 		line-height: 20px;
 		margin-bottom: 0px;
 	}
@@ -192,7 +180,16 @@
 		text-align: right;
 	}
 	
-	
+	footer .copyright {
+		clear: left;
+		float: left;
+		margin-right: 0;
+		padding-left: 20px;
+		width: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
 	
 	#leftContent, #mainContent, #sidebarContent {
 		margin-top: 0px;
@@ -215,7 +212,7 @@
 			font-size: 12px;
 	}
 	
-	.locationMainList li h3 {
+	.locationMainList li h2 {
 		font-size: 18px;
 		line-height: 18px;
 	}
@@ -226,12 +223,12 @@
 	}
 	
 	.librarySlideshow {
-		position: relative;
-		width: 320px;
+		height: auto;
 		left: auto;
 		margin-top: 5px;
-		height: 150px;
+		position: relative;
 		top: auto;
+		width: 100%;
 	}
 	
 	.tabcontent {
@@ -242,9 +239,9 @@
 	.libraryContent {
 		width: 270px;
 	}
-	.libraryContent h2 {
-	
-	}
+
+	.libraryContent .librarySubject,
+	.libraryContent h2,
 	.libraryContent h3 {
 		font-size: 15px;
 		line-height: 15px;
@@ -264,17 +261,45 @@
 		width: 270px;
 	}
 	
+	.page-hours .upcomingSpecial {
+		display: none;
+	}
+	
+	.page-hours .libraryTitle .libraryAlert {
+		border: 1px solid #ffcc33;
+		margin-top: 1em;
+		width: 100%;
+	}
+	
+	.page-hours .libraryAlert span {
+  	padding: 0;
+	}
+	
 	.libraryTitle .libraryAlert {
+		background: #333;
+		border: 1px solid #ffcc33;
+		bottom: auto;
+		color: #ffcc33;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		padding: 10px;
 		position: relative;
 		right: auto;
-		bottom: auto;
-		width: 280px;
-		margin-top: 5px;
-		padding: 10px;
-		margin-bottom: 10px;
-		background: #d0d0d0;
-		border: 1px solid #999;
-		color: #333;
+		max-width: 100%;
+		width: 100%;
+		-o-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+  
+  .libraryTitle .libraryAlert span {
+		background: none;
+		box-shadow: none;
+	}
+  
+	.libraryTitle .libraryAlert a {
+		color: #ffcc33;
 	}
 	
 	#slideshowNav {
@@ -310,16 +335,17 @@
 		border-right: none;
 	}
 	
-	#prevWeek {
-		left: 0px;
+	#hourNav #prevWeek {
+		margin-left: 0;
+		margin-right: 1.5em;
 	}
 	
-	#thisWeek {
-		left: 120px;
+	#hourNav #thisWeek {
+		margin-left: 0;
 	}
 	
-	#nextWeek {
-	
+	#hourNav #nextWeek {
+		margin-left: 0;
 	}
 	
 	
@@ -399,6 +425,7 @@
 		min-height: 20px;
 	}
 	
+	/*
 	.hrList td.cur {
 		border-left: 1px solid #ccc;
 		border-bottom: 5px solid #ccc;
@@ -416,6 +443,30 @@
 	}
 	.hrList .even td.curAfter {
 		border-left: 1px solid #ccc;	
+	}
+	*/
+
+	.hrList .name .libraryAlert,
+	.hrList .name .libraryAlert p {
+		max-width: none;
+		width: 100%;
+	}
+
+	.hrList .name .libraryAlert {
+		line-height: 1.5;
+		margin: 0.5em 0.5em 0 0.5em;
+		min-height: 2em;
+		padding-top: 0.1em;
+	}
+
+	.hrList .name .libraryAlert p {
+		margin: 0 !important;
+	}
+
+	.hrList .name .libraryAlert .icon-exclamation-sign {
+		line-height: 1;
+		margin-top: -8px;
+		padding: 0;
 	}
 	
 	.hrList .mobileToday {
@@ -443,7 +494,7 @@
 	.hrList .space247 {
 		position: absolute;
 		top: 10px;
-		right: 60px;
+		right: 10px;
 	}
 	.libraryContent a[href^=tel] {
 		color: #424286;
@@ -460,7 +511,7 @@
 	}
 	
 	.nameHolder {
-		width: 60%;
+		width: 80%;
 	}
 	
 	.tdInside {
@@ -506,18 +557,64 @@
 		color: #fff;
 		background: transparent url(../images/arrow-white.png) no-repeat right 10px !important;
 	}
+
+	/* Flexboxes and tabs */
 	
+	.page-getit .mainContent {
+		margin: 0;
+		padding: 0;
+	}
 	
+	.page-getit .yourSearch.header {
+		font-size: 1em;
+	}
 	
-}
+	.page-getit .yourSearch h2 {
+		font-size: 1.5em;
+		line-height: 1.25;
+	}
 
-@media (max-width: 979px) {
+	.flexbox .flexContainer {
+		display: block;
+	}
+	
+	.flexbox .flexItem,
+	.flexbox .flexItem:nth-of-type(n) {
+		margin: 1em auto;
+		width: 99%;
+	}
 
-}
+	.mainContent {
+		padding: 1em;
+	}
 
-@media (min-width: 980px) {
+	.mainContent .tabcontent {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
 
+	.mainContent .tabcontent .flexItem {
+		display: block;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	
+	.tabcontent .flexContainer {
+		display: none;
+	}
+	
+	.tabcontent .active.flexContainer {
+		display: block;
+	}
 
+	.flexbox .tabcontent .active.flexContainer {
+		display: block;
+	}
 
-
-}
+	.mainContent .tabcontent .first {
+		border-right: none;
+	}
+	
+} /* end @media (max-width:480px) */

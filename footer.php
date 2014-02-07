@@ -11,8 +11,8 @@
  */
 ?>
 		<div class="clear"></div>
-		<footer class="inner">
-			<div id="footerHeader" class="">
+		<footer class="inner" role="contentinfo">
+			<div id="footerHeader" class="footerHeader">
 				<a href="/" id="logoFooter">MIT Libraries</a>
 				<div id="footerMainLink" class="">
 					<a href="/" id="homeFooter"><span class="hidden-phone">Libraries</span> home</a> |
@@ -34,8 +34,15 @@
 					<a href="http://libguides.mit.edu/content.php?pid=104796&sid=788991" id="google" class="social">Google</a>
 				</div>
 			</div>
-			<div id="footerContent">
+			<div id="footerContent" class="footerContent group">
 				<?php
+
+					global $mainSite;
+					global $blog_id;
+					$current_blog_id = $blog_id;
+
+					switch_to_blog($mainSite);
+
 					$args = array(
 					
 					);
@@ -64,17 +71,17 @@
 							$id = $child->ID;						
 					?>
 						<li><a href="<?php echo $url ?>"><?php echo $title ?></a></li>
-					<?php
-						}
-					?>
+
+					<?php } ?>
+					
 					</ul>
 				</div>
 
 				<?php				
 						
 					}
+					switch_to_blog($current_blog_id);
 				?>
-				<div class="clear"></div>
 			</div>
 			
 			<div id="footerFooter" class="">
@@ -95,32 +102,19 @@
 		</footer>		
 	</div>
 
-
-
 <!-- Load JS in Footer -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 if (typeof jQuery == 'undefined')
 {
     document.write(unescape("%3Cscript src='js/jquery.js' type='text/javascript'%3E%3C/script%3E"));
 }
 </script>
-<script src="<?php bloginfo('template_directory') ?>/libs/datepicker/glDatePicker.min.js"></script>
-<script src="<?php bloginfo('template_directory') ?>/js/jquery.cycle.js"></script>
 <script src="<?php bloginfo('template_directory') ?>/libs/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php bloginfo('template_directory') ?>/libs/lightbox/js/lightbox.js"></script>
 <script src="<?php bloginfo('template_directory') ?>/js/core.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="<?php bloginfo('template_directory') ?>/libs/infobox/infobox.js"></script>
 <script>
-
-
-$("#hero").cycle({
-	fx: "fade",
-	speed: 1500,
-	pause: 0
-
-});
 
 // Javascript to enable link to tab
 var url = document.location.toString();
@@ -136,6 +130,6 @@ $('.tabnav a').on('shown', function (e) {
 
 </script>
 
-<?php wp_footer(); ?>
+<?php	wp_footer(); ?>
 </body>
 </html>

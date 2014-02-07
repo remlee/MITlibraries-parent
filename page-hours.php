@@ -10,9 +10,6 @@
  * @package WordPress
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
- 
- 
- 
  */
  
 $pageRoot = getRoot($post);
@@ -40,18 +37,23 @@ $dtWeekday = date("N", $dt);
 </script>
 <?php
 
-$today = strtotime($dtYear."W".$dtWeek.$dtWeekday);
+//$today = strtotime($dtYear."W".$dtWeek.$dtWeekday);
+$today = strtotime($inDate);
 
-$dtMo = date("n");
-$dtDay = date("j");
-$dtYear = date("Y");
-$dtWeek = date("W");
-$dtWeekday = date("N");
+$dtTodayMo = date("n");
+$dtTodayDay = date("j");
+$dtTodayYear = date("Y");
+$dtTodayWeek = date("W");
+$dtTodayWeekday = date("N");
 
 
-$now = strtotime($dtYear."W".$dtWeek.$dtWeekday);
+$now = strtotime($dtTodayYear."W".$dtTodayWeek.$dtTodayWeekday);
 
 $wk = date("W", $dt);
+
+if ($wk == "01" && $dtMo == "12") {
+	$dtYear++;
+}	
 
 $mon = strtotime($dtYear."W".$wk."1");
 $tue = strtotime($dtYear."W".$wk."2");
@@ -84,156 +86,169 @@ $thisWeek = date("Y-n-j");
  ?>
 
 
-		<div id="stage" class="inner thinSidebar hours">
-			<div class="title libraryTitle">
-				<div class="libraryContent">
-					<h2><?php showBreadTitle(); ?></h2>
-				</div>
+<div id="stage" class="inner thinSidebar hours group" role="main">
 
-				<div class="upcomingSpecial">
-					<?php the_content(); ?>
-				</div>
-				
-				<div id="hourCalendar" class="hourCalendar hidden-phone">
-					
-				</div>
-			</div>		
+	<div class="title libraryTitle">
+
+		<div class="libraryContent">
+			<h1><?php showBreadTitle(); ?></h1>
+		</div>
 			
-			<div id="content">
-				<div id="hourContent" class="light">
-				
-					<div id="hourNav">
-						<div id="prevWeek"><i class="icon-arrow-left"></i> <a href="<?php echo $path."?d=".$prevWeek; ?>">Previous week</a></div>
-						<div id="thisWeek"><a href="<?php echo $path."?d=".$thisWeek; ?>"">This week</a></div>
-						<div id="nextWeek"><a href="<?php echo $path."?d=".$nextWeek; ?>"">Next week</a> <i class="icon-arrow-right"></i></div>
-					</div>
-					<table class="hrList">
-						<thead>
-							<th class="name">Locations</th>
-							<?php $next = ""; ?>
-							
-							<?php $i = 0; $day = $arDays[$i]; ?>
-							<th class="firstDisplay <?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
-							</th>
-							<?php $i = 1; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
-							</th>
-							<?php $i = 2; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
-							</th>
-							<?php $i = 3; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
-							</th>
-							<?php $i = 4; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
-							</th>
-							<?php $i = 5; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
-							</th>
-							<?php $i = 6; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
-							</th>
+			<?php 
+				$hoursAlert = apply_filters('the_content', $post->post_content);
+				if($hoursAlert != ''): 
+			?>
+				<div class="upcomingSpecial">
+					<?php echo $hoursAlert; ?>
+				</div>
+			<?php endif; ?>
 
-						</thead>
-						<tbody>
-						<?php
-							
-							$args = array(
-								'post_type' => 'location',
-								'meta_key' => 'primary_location',
-								'meta_value' => 1,
-								'posts_per_page' => -1,
-								/*'orderby' => 'menu_order',*/
-								'orderby' => 'name',
-								'order' => 'ASC'
-							);							
-							$libraryList = new WP_Query( $args );
-							
-							$rowOdd = "even";
-						?>
-						<?php while ( $libraryList->have_posts() ) : $libraryList->the_post(); ?>
-							<?php get_template_part( 'content', 'hour-row' ); ?>
-						<?php endwhile; 	?>
-						</tbody>
-						<thead>
-							<th class="name">More Locations</th>
-							<?php $next = ""; ?>
-							
-							<?php $i = 0; $day = $arDays[$i]; ?>
-							<th class="firstDisplay <?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-							</th>
-							
-							<?php $i = 1; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-							</th>
-							<?php $i = 2; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-							</th>
-							<?php $i = 3; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-							</th>
-							<?php $i = 4; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-							</th>
-							<?php $i = 5; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-							</th>
-							<?php $i = 6; $day = $arDays[$i]; ?>
-							<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
-								<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-								<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
-							</th>
-						</thead>
-						<tbody>
-						<?php
-							
-							$args = array(
-								'post_type' => 'location',
-								'meta_key' => 'primary_location',
-								'meta_value' => 0,
-								'posts_per_page' => -1,
-								/*'orderby' => 'menu_order',*/
-								'orderby' => 'name',								
-								'order' => 'ASC'
-							);							
-							$libraryList = new WP_Query( $args );
-							
-							$rowOdd = "even";
-						?>
-						<?php while ( $libraryList->have_posts() ) : $libraryList->the_post(); ?>
-							<?php get_template_part( 'content', 'hour-row' ); ?>
-						<?php endwhile; 	?>
-						</tbody>
-					</table>
-				</div>		
-			</div>
+			<?php 
+				include(locate_template('inc/alert.php'));
+			 ?>
+			
+		<div id="hourCalendar" class="hourCalendar hidden-phone">
 		</div>
 
+	</div>		
+	
+	<div id="content" class="allContent">
+
+		<div id="hourContent" class="light">
+		
+			<div id="hourNav">
+				<div id="prevWeek"><i class="icon-arrow-left"></i> <a href="<?php echo $path."?d=".$prevWeek; ?>">Previous week</a></div>
+				<div id="thisWeek"><a href="<?php echo $path."?d=".$thisWeek; ?>"">This week</a></div>
+				<div id="nextWeek"><a href="<?php echo $path."?d=".$nextWeek; ?>"">Next week</a> <i class="icon-arrow-right"></i></div>
+			</div>
+			<table class="hrList">
+				<thead>
+					<th class="name">Locations</th>
+					<?php $next = ""; ?>
+					
+					<?php $i = 0; $day = $arDays[$i]; ?>
+					<th class="firstDisplay <?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
+					</th>
+					<?php $i = 1; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
+					</th>
+					<?php $i = 2; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
+					</th>
+					<?php $i = 3; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
+					</th>
+					<?php $i = 4; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
+					</th>
+					<?php $i = 5; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
+					</th>
+					<?php $i = 6; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDowMobile, $day);?></div></span>
+					</th>
+
+				</thead>
+				<tbody>
+				<?php
+					
+					$args = array(
+						'post_type' => 'location',
+						'meta_key' => 'primary_location',
+						'meta_value' => 1,
+						'posts_per_page' => -1,
+						/*'orderby' => 'menu_order',*/
+						'orderby' => 'name',
+						'order' => 'ASC'
+					);							
+					$libraryList = new WP_Query( $args );
+					
+					$rowOdd = "even";
+				?>
+				<?php while ( $libraryList->have_posts() ) : $libraryList->the_post(); ?>
+					<?php get_template_part( 'content', 'hour-row' ); ?>
+				<?php endwhile; 	?>
+				</tbody>
+				<thead>
+					<th class="name">More Locations</th>
+					<?php $next = ""; ?>
+					
+					<?php $i = 0; $day = $arDays[$i]; ?>
+					<th class="firstDisplay <?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+					</th>
+					
+					<?php $i = 1; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+					</th>
+					<?php $i = 2; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+					</th>
+					<?php $i = 3; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+					</th>
+					<?php $i = 4; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+					</th>
+					<?php $i = 5; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+					</th>
+					<?php $i = 6; $day = $arDays[$i]; ?>
+					<th class="<?php echo $next; $next=""; if ($now == $day) { echo "cur"; $next="curAfter";} ?>">
+						<span class="fullDay"><?php echo date("l", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+						<span class="mobileDay"><?php echo date("D", $day); ?><div class='date'><?php echo date($dfDow, $day);?></div></span>
+					</th>
+				</thead>
+				<tbody>
+				<?php
+					
+					$args = array(
+						'post_type' => 'location',
+						'meta_key' => 'primary_location',
+						'meta_value' => 0,
+						'posts_per_page' => -1,
+						/*'orderby' => 'menu_order',*/
+						'orderby' => 'name',								
+						'order' => 'ASC'
+					);							
+					$libraryList = new WP_Query( $args );
+					
+					$rowOdd = "even";
+				?>
+				<?php while ( $libraryList->have_posts() ) : $libraryList->the_post(); ?>
+					<?php get_template_part( 'content', 'hour-row' ); ?>
+				<?php endwhile; 	?>
+				</tbody>
+			</table>
+		</div>
+
+	</div> <!-- end div.allContent -->
+
+</div> <!-- end div#stage -->
 
 <?php get_footer(); ?>

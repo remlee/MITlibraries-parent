@@ -21,13 +21,13 @@ $isRoot = $section->ID == $post->ID;
  
 get_header(); ?>
 
-		<div id="breadcrumb" class="inner hidden-phone">
+		<div id="breadcrumb" class="inner hidden-phone" role="navigation" aria-label="breadcrumbs">
 			<?php wsf_breadcrumbs(" &raquo; ", ""); ?>
 		</div>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 		
-		<div id="stage" class="inner column3 tertiaryPage row">
+		<div id="stage" class="inner column3 tertiaryPage row" role="main">
 	
 			<div class="title span12">
 				<?php if ($isRoot): ?>
