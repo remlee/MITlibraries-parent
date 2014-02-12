@@ -6,5 +6,26 @@ $darkBlue: #424286;
 $footerBlue: #c9e3fc;
 $footerPurple: #3b3a74;
 
+.sg-colors  {
+	.sg-color:nth-of-type(1) .sg-color-swatch {
+		background: $titleGrey;
+	}
+	.sg-color:nth-of-type(2) .sg-color-swatch {
+		background: $megaNavBlue;
+	}
+	.sg-color:nth-of-type(3) .sg-color-swatch {
+		background: $yellow;
+	}
+	.sg-color:nth-of-type(4) .sg-color-swatch {
+		background: $darkBlue;
+	}
+	.sg-color:nth-of-type(5) .sg-color-swatch {
+		background: $footerBlue;
+	}
+	.sg-color:nth-of-type(6) .sg-color-swatch {
+		background: $footerPurple;
+	}
+}
+
 // Headings
 $h1-size: 1.75rem;
