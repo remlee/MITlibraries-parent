@@ -1,0 +1,16 @@
+// Colors
+$megaNavBlue: #004bbd;
+$titleGrey: #333;
+$yellow: #ffcc33;
+$darkBlue: #424286;
+$footerBlue: #c9e3fc;
+$footerPurple: #3b3a74;
+
+.sg-color {
+	#{--a} {
+		background: $megaNavBlue;
+	}
+}
+
+// Headings
+$h1-size: 1.75rem;
