@@ -69,6 +69,7 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/build/global.css">
 </head>
 <body>
     
