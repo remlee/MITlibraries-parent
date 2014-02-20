@@ -2,19 +2,19 @@
   background: #333333;
 }
 .sg-colors .sg-color:nth-of-type(2) .sg-color-swatch {
-  background: #004bbd;
+  background: #3b3a74;
 }
 .sg-colors .sg-color:nth-of-type(3) .sg-color-swatch {
-  background: #ffcc33;
+  background: #424286;
 }
 .sg-colors .sg-color:nth-of-type(4) .sg-color-swatch {
-  background: #424286;
+  background: #004bbd;
 }
 .sg-colors .sg-color:nth-of-type(5) .sg-color-swatch {
   background: #c9e3fc;
 }
 .sg-colors .sg-color:nth-of-type(6) .sg-color-swatch {
-  background: #3b3a74;
+  background: #ffcc33;
 }
 
 [class*="h1"] {
