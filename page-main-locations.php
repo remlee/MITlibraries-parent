@@ -48,7 +48,7 @@ get_header(); ?>
 								'orderby' => 'menu_order',
 								'order' => 'ASC',
 								'no_found_rows' => true,
-   							'update_post_term_cache' => false
+								'update_post_term_cache' => false
 							);
 							// Use one WP_Query for everything.							
 							$libraryList = new WP_Query( $args );
@@ -81,10 +81,10 @@ get_header(); ?>
 							}
 							
 							$location = get_field("building_location");
-								$coords = explode(",", $location['coordinates']);
-								$lat = $coords[0];
-								$lng = $coords[1];
-								$address = $location['address'];
+							$coords = explode(",", $location['coordinates']);
+							$lat = $coords[0];
+							$lng = $coords[1];
+							$address = $location['address'];
 							
 							$name = html_entity_decode(get_the_title());
 							
@@ -99,6 +99,7 @@ get_header(); ?>
 							if ($lat != "" && $lng != ""):
 						?>				
 						<div class="location">
+
 							<div class="id"><?php echo $locationId; ?></div>
 							<div class="slug"><?php echo $slug; ?></div>
 							<div class="name"><?php echo $name; ?></div>
@@ -125,7 +126,9 @@ get_header(); ?>
 				<div id="map">
 				
 				</div>
+
 				<ul class="locationMainList dark">
+
 						<?php
 							// Rewind the initial loop.
 							rewind_posts();
@@ -133,47 +136,36 @@ get_header(); ?>
 							$i = 1;
 							while ( $libraryList->have_posts() && $i < 7 ) : $libraryList->the_post();
 						?>
+
 						<?php 
 							$locationId = get_the_ID();
 							$slug = $post->post_name;
-							
 							$subject = cf("subject");
 							$phone = cf("phone");
 							$building = cf("building");
 							$spaces = cf("group_spaces");
 							$equipment = cf("equipment");
 							$expert = cf("expert");
-							
 							$study24 = get_field("study_24");
-
 							$displayPage = get_field("display_page");
 							$pageID = $displayPage->ID;
-							$pageLink = get_permalink($pageID);
-							
+							$pageLink = get_permalink($pageID);	
 							$temp = $post;
 							$hasHours = hasHours($locationId, date("Y-m-d"));
 							$hoursToday = getHoursToday($locationId);
 							$isOpen = getOpen($locationId);
 							$post = $temp;
-							
-							
 						?>
 							<li>
-								<!--
-								Main locations listing
-								-->
-							
-							
-							
 								<?php if ($hasHours): ?>
-								<div class="hours">Today&rsquo;s hours: <?php echo $hoursToday; ?></div>
+									<div class="hours">Today&rsquo;s hours: <?php echo $hoursToday; ?></div>
 								<?php else: ?>
-								<div class="hours">TBA</div>
+									<div class="hours">TBA</div>
 								<?php endif; ?>
 								<h2><a href="<?php echo $pageLink ?>" class="locationLink"><?php the_title(); ?></a></h2>
 								<div class="sub"><?php echo $subject ?></div>
 								<?php if ($phone != ""): ?>
-								<?php echo $phone ?>
+									<?php echo $phone ?>
 								<?php endif; ?><a class="map" data-target="<?php echo $locationId; ?>" href="#!<?php echo $slug; ?>">Map: <?php echo $building ?></a>
 								<?php if ($study24 == 1): ?>
 									<a class="space247" href="<?php echo $gStudy24Url; ?>" alt="This location contains one or more study spaces available 24 hours a day, seven days a week. Click the link for more info." title="Study 24/7">Study 24/7</a>
@@ -199,30 +191,20 @@ get_header(); ?>
 						while ( $libraryList->have_posts() ) : $libraryList->the_post();
 						$locationId = get_the_ID();
 						$slug = $post->post_name;
-						
-						$subject = cf("subject");
-						$phone = cf("phone");
 						$building = cf("building");
-						$spaces = cf("group_spaces");
-						$equipment = cf("equipment");
-						$expert = cf("expert");
-						
-						$noHours = cf("no_hours");
-						
-						$temp = $post;
+						$phone = cf("phone");
 						$hasHours = hasHours($locationId, date("Y-m-d"));
 						$hoursToday = getHoursToday($locationId);
-						$isOpen = getOpen($locationId);
-						$post = $temp;
-						
+						$noHours = cf("no_hours");
 						$displayPage = get_field("display_page");
 						$pageID = $displayPage->ID;
-						$pageLink = get_permalink($pageID);
+						$pageLink = get_permalink($pageID);	
 					?>
+
 						<li class="span3">
-							<h3><a href="<?php echo $pageLink; ?>"><?php echo the_title() ?></a> <i class="icon-arrow-right"></i></h3>
+							<h3><a href="<?php echo $pageLink; ?>"><?php the_title(); ?></a> <i class="icon-arrow-right"></i></h3>
 							<?php if ($phone != ""): ?>
-							<?php echo $phone ?><br/>
+								<?php echo $phone ?><br/>
 							<?php endif; ?>
 							
 							<?php if ($noHours): ?>
@@ -252,6 +234,5 @@ get_header(); ?>
 				<?php get_sidebar(); ?>			
 		</div>		
 	</div>
-
 
 <?php get_footer(); ?>
