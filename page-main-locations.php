@@ -40,16 +40,20 @@ get_header(); ?>
 			
 			<div class="preContent span12 locations-list group" id="locationsHome">
 				<div id="mapMarkers" class="meta">
+
 						<?php
-							
 							$args = array(
 								'post_type' => 'location',
 								'posts_per_page' => -1,
 								'orderby' => 'menu_order',
-								'order' => 'ASC'
-							);							
+								'order' => 'ASC',
+								'no_found_rows' => true,
+   							'update_post_term_cache' => false
+							);
+							// Use one WP_Query for everything.							
 							$libraryList = new WP_Query( $args );
 						?>
+
 						<?php while ( $libraryList->have_posts() ) : $libraryList->the_post(); ?>
 						<?php 
 							$locationId = get_the_ID();
