@@ -127,16 +127,6 @@ get_header(); ?>
 				</div>
 				<ul class="locationMainList dark">
 						<?php
-							
-							$args = array(
-								'post_type' => 'location',
-								'meta_key' => 'primary_location',
-								'meta_value' => 1,
-								'posts_per_page' => -1,
-								'orderby' => 'menu_order',
-								'order' => 'ASC'
-							);							
-							$libraryList = new WP_Query( $args );
 						?>
 						<?php while ( $libraryList->have_posts() ) : $libraryList->the_post(); ?>
 						<?php 
@@ -197,19 +187,6 @@ get_header(); ?>
 				<div id="mainContent" class="span9">
 					<h2 class="bigHead">More Locations</h2>
 					<ul class="locationList row light">
-					<?php
-						$args = array(
-							'post_type' => 'location',
-							'meta_key' => 'primary_location',
-							'meta_compare' => '!=',
-							'meta_value' => 1,
-							'posts_per_page' => -1,
-							'orderby' => 'menu_order',
-							'order' => 'ASC'
-							
-						);							
-						$subList = new WP_Query( $args );
-					?>					
 					<?php while ( $subList->have_posts() ) : $subList->the_post(); ?>
 					<?php 
 						$locationId = get_the_ID();
