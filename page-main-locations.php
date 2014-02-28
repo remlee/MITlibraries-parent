@@ -120,15 +120,19 @@ get_header(); ?>
 							</div>
 						</div>
 						<?php endif; ?>
-						<?php endwhile; ?>
+						<?php endwhile; // end first past through the loop. ?>
 				</div>
 				<div id="map">
 				
 				</div>
 				<ul class="locationMainList dark">
 						<?php
+							// Rewind the initial loop.
+							rewind_posts();
+							// Show only the first 6 locations
+							$i = 1;
+							while ( $libraryList->have_posts() && $i < 7 ) : $libraryList->the_post();
 						?>
-						<?php while ( $libraryList->have_posts() ) : $libraryList->the_post(); ?>
 						<?php 
 							$locationId = get_the_ID();
 							$slug = $post->post_name;
@@ -177,7 +181,7 @@ get_header(); ?>
 
 							</li>	
 						
-						<?php endwhile; // end of the loop. ?>					
+						<?php $i++; endwhile; // end second pass through the loop. ?>					
 			
 			
 				</ul>
@@ -187,8 +191,12 @@ get_header(); ?>
 				<div id="mainContent" class="span9">
 					<h2 class="bigHead">More Locations</h2>
 					<ul class="locationList row light">
-					<?php while ( $subList->have_posts() ) : $subList->the_post(); ?>
-					<?php 
+				
+					<?php  
+						// Rewind the loop once more...
+						rewind_posts();
+						// ... then run it again.
+						while ( $libraryList->have_posts() ) : $libraryList->the_post();
 						$locationId = get_the_ID();
 						$slug = $post->post_name;
 						
@@ -230,7 +238,8 @@ get_header(); ?>
 							<a class="map" data-target="<?php echo $locationId; ?>" href="#!<?php echo $slug; ?>">Map: <?php echo $building ?></a> <i class="icon-arrow-right"></i>
 						</li>
 					
-					<?php endwhile; // end of the loop. ?>					
+					<?php endwhile; // end last pass through loop. ?>			
+
 					</ul>
 					
 				</div>
