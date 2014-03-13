@@ -50,7 +50,7 @@ get_header(); ?>
 								'no_found_rows' => true,
 								'update_post_term_cache' => false
 							);
-							// Use one WP_Query for everything.
+							// Use one WP_Query for everything.							
 							$libraryList = new WP_Query( $args );
 						?>
 
