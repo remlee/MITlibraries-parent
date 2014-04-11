@@ -4346,6 +4346,7 @@ you can use the generic selector below, but it's slower:
   }
 }
 
+[class*="--maintenance"],
 .content.maintenance {
   background: url(/wp-content/themes/libraries/images) top;
   background-size: cover;
@@ -4357,12 +4358,14 @@ you can use the generic selector below, but it's slower:
   width: 100%;
 }
 @media only screen and (max-width: 480px) {
+  [class*="--maintenance"],
   .content.maintenance {
     background: none;
     margin: 0 auto;
     padding: 0;
   }
 }
+[class*="--maintenance"] .message-maintenance,
 .content.maintenance .message-maintenance {
   background: #fffbf0;
   background: #fffbf0;
@@ -4375,13 +4378,16 @@ you can use the generic selector below, but it's slower:
   padding: 2em;
   width: 72%;
 }
+[class*="--maintenance"] .message-maintenance h2,
 .content.maintenance .message-maintenance h2 {
   margin-bottom: 1em;
 }
+[class*="--maintenance"] .message-maintenance p,
 .content.maintenance .message-maintenance p {
   font-size: 1.25rem;
 }
 @media only screen and (max-width: 480px) {
+  [class*="--maintenance"] .message-maintenance,
   .content.maintenance .message-maintenance {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;

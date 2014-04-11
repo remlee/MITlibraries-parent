@@ -37,6 +37,10 @@ get_header(); ?>
 					<a id="showMap" class="hidden-phone btn btn-warning btnShow" href="#">Show map</a>
 				</div>
 			</div>
+
+			<div class="map-locations--maintenance">
+				<h2>Sorry, we're performing some maintenance and the map is temporarily unavailable.</h2>
+			</div>
 			
 			<div class="preContent span12 locations-list group" id="locationsHome">
 				<div id="mapMarkers" class="meta">
